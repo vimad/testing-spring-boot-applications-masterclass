@@ -28,6 +28,22 @@ class ReviewRepositoryNoInMemoryTest {
           .withUsername("duke")
           .withPassword("s3cret");
 
+  // Containers can be reuse in tests without stoping docker container
+  // need to add below property in .testcontainers.properties file which is in user directory
+  // testcontainers.reuse.enable=true
+  // Remove the @Testcontainers annotation in the class
+  // -----------------------------------------------
+//  static PostgreSQLContainer<?> container =
+//    (PostgreSQLContainer<?>)new PostgreSQLContainer<>("postgres:15.3")
+//      .withDatabaseName("test")
+//      .withUsername("duke")
+//      .withPassword("s3cret")
+//      .withReuse(true);
+//
+//  static {
+//    container.start();
+//  }
+
   @DynamicPropertySource
   static void properties(DynamicPropertyRegistry registry) {
     registry.add("spring.datasource.url", container::getJdbcUrl);
